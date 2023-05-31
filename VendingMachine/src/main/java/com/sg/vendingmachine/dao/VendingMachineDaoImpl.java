@@ -12,7 +12,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     private ArrayList<Product> products;
 
     @Override
-    public Product addProduct(String productId, Product product) {
+    public Product addProduct(String productName, Product product) {
         return null;
     }
 
@@ -22,22 +22,22 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     }
 
     @Override
-    public List<String> getAllProductIds() {
+    public List<String> getAllProductNames() {
         return null;
     }
 
     @Override
-    public Product getProduct(String productId) {
+    public Product getProduct(String productName) {
         return null;
     }
 
     @Override
-    public Product updateProduct(String productID, Product product) {
+    public Product updateProduct(String productName, Product product) {
         return null;
     }
 
     @Override
-    public Product removeProduct(String productId) {
+    public Product removeProduct(String productName) {
         return null;
     }
 
