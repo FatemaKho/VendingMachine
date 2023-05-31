@@ -1,4 +1,4 @@
-package com.sg.vendingmachinedao;
+package main.java.com.sg.vendingmachine.dao;
 
 public interface VendingMachineDao {
 }
