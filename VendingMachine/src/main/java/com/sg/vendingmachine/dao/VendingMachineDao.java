@@ -9,7 +9,7 @@ import java.util.Map;
 public interface VendingMachineDao {
     Product addProduct(String productName, Product product);
     List<Product> getAllProducts();
-    List<Product> getAllProductNames();
+    List<String> getAllProductNames();
 
     Product getProduct(String productName);
     Product updateProduct(String productName, Product product);
