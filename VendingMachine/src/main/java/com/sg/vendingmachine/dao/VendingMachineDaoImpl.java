@@ -6,10 +6,11 @@ import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
-    private ArrayList<Product> products;
+    private Map<String, Product> products= new HashMap<>();
 
     @Override
     public Product addProduct(String productName, Product product) {
