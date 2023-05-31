@@ -27,7 +27,7 @@ public class VendingMachineView {
         // Display the change returned to the user
         // ...
     }
-    public String promptItemSelection() {
+    public int promptItemSelection() {
         // Prompt the user to select an item and return the input
         // ...
     }

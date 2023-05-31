@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.controller;
 
+import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
@@ -11,71 +12,35 @@ import java.util.Map;
 public class VendingMachineController {
     private VendingMachineView view;
     private UserIO io = new UserIOConsoleImpl();
+    private VendingMachineServiceLayer service;
 
-    public VendingMachineController(VendingMachineView view) {
+    public VendingMachineController(VendingMachineView view, VendingMachineServiceLayer service) {
+        this.service = service;
         this.view = view;
     }
 
+
     public void run() {
         boolean keepGoing = true;
-        boolean getCaseAndCheckFunds;
-        List<String> productNames;
-        BigDecimal money;
-        Map products;
-        int productSelection = 0;
+        int selection = view.promptItemSelection();
 
         while (keepGoing) {
-            products = getProducts();
-            productNames = getProductNames();
-            money = getMoney();
-            productSelection = getProductSelection();
-
-            switch (productSelection) {
+            switch (selection) {
                 case 1:
                 case 2:
                 case 3:
                 case 4:
                 case 5:
                 case 6:
-                    int caseIndex = productSelection - 1;
-                    getCaseAndCheckFunds = printCase(caseIndex, money);
-                    keepGoing = getCaseAndCheckFunds;
-                    break;
+
                 case 7:
                     keepGoing = false;
                     break;
-                default:
-                    unknownCommand();
+
             }
         }
-        exitMessage();
+
+
     }
 
-    private void unknownCommand(){
-        view.displayUnknownCommandBanner();
-    }
-
-    private void exitMessage() {
-        view.displayExitBanner();
-    }
-
-    private Map getProducts() {
-        return view.getAndSeedProducts();
-    }
-
-    private List<String> getProductNames(){
-        return view.printMenuAndGetProductNames();
-    }
-
-    private BigDecimal getMoney(){
-        return view.getMoney();
-    }
-
-    private int getProductSelection(){
-        return view.getProductSelection();
-    }
-
-    private boolean printCase(int index, BigDecimal money){
-        return view.printCasesAndCheckFunds(index, money);
-    }
 }
