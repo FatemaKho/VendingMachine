@@ -14,6 +14,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     @Override
     public Product addProduct(String productName, Product product) {
         Product newProduct = products.put(productName, product);
+        return newProduct;
     }
 
     @Override
