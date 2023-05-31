@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.controller;
 
+import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
@@ -22,22 +23,11 @@ public class VendingMachineController {
 
     public void run() {
         boolean keepGoing = true;
-        int selection = view.promptItemSelection();
+        String selection = view.promptItemSelection();
+        BigDecimal money = view.promptDepositAmount();
 
         while (keepGoing) {
-            switch (selection) {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
 
-                case 7:
-                    keepGoing = false;
-                    break;
-
-            }
         }
 
 
