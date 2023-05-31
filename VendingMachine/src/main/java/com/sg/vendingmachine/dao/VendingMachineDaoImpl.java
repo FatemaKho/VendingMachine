@@ -4,7 +4,6 @@ import com.sg.vendingmachine.dto.Product;
 import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -14,19 +13,21 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public Product addProduct(String productName, Product product) {
-        return null;
+        Product newProduct = products.put(productName, product);
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return null;
+    public ArrayList<Product> getAllProducts() {
+        return new ArrayList<Product>(products.values());
     }
 
     @Override
-    public List<String> getAllProductNames() {
-        return null;
-    }
+    public ArrayList<String> getAllProductNames()  {
+        ArrayList<String> keyList = new ArrayList<>();
+        keyList.addAll(products.keySet());
 
+        return keyList;
+    }
     @Override
     public Product getProduct(String productName) {
         return products.get(productName);
