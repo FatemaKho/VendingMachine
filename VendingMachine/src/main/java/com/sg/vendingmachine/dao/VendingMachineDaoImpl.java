@@ -5,15 +5,15 @@ import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
-    private Map<String, Product> products= new HashMap<>();
+    private TreeMap<Integer, Product> products= new TreeMap<>();
 
     @Override
-    public Product addProduct(String productName, Product product) {
-        Product newProduct = products.put(productName, product);
+    public Product addProduct(int productId, Product product) {
+        Product newProduct = products.put(productId, product);
         return newProduct;
     }
 
@@ -23,25 +23,25 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     }
 
     @Override
-    public ArrayList<String> getAllProductNames()  {
-        ArrayList<String> keyList = new ArrayList<>();
+    public ArrayList<Integer> getAllProductIds()  {
+        ArrayList<Integer> keyList = new ArrayList<>();
         keyList.addAll(products.keySet());
 
         return keyList;
     }
     @Override
-    public Product getProduct(String productName) {
-        return products.get(productName);
+    public Product getProduct(int productId) {
+        return products.get(productId);
     }
 
     @Override
-    public Product updateProduct(String productName, Product product) {
-        return products.replace(productName, product);
+    public Product updateProduct(int productId, Product product) {
+        return products.replace(productId, product);
     }
 
     @Override
-    public Product removeProduct(String productName) {
-        Product removedProduct= products.remove(productName);
+    public Product removeProduct(int productId) {
+        Product removedProduct= products.remove(productId);
         return removedProduct;
     }
 

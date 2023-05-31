@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface VendingMachineDao {
-    Product addProduct(String productName, Product product);
+    Product addProduct(int productId, Product product);
     ArrayList<Product> getAllProducts();
-    ArrayList<String> getAllProductNames();
+    ArrayList<Integer> getAllProductIds();
 
-    Product getProduct(String productName);
-    Product updateProduct(String productName, Product product);
-    Product removeProduct(String productName);
+    Product getProduct(int productId);
+    Product updateProduct(int productId, Product product);
+    Product removeProduct(int productId);
     Map<String, Product> loadProductsFromFile() throws VendingMachinePersistenceException;
     void writeProductsToFile() throws VendingMachinePersistenceException;
 
