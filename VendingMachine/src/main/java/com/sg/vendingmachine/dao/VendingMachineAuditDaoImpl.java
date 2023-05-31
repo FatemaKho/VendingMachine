@@ -1,4 +1,4 @@
-package com.sg.vendingmachinedao;
+package com.sg.vendingmachine.dao;
 
 public class VendingMachineAuditDaoImpl {
 }
