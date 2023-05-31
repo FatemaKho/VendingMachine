@@ -10,12 +10,11 @@ public class Change {
     private int nickels;
     private int pennies;
     public Change(BigDecimal amount) {
-this.quarters=amount.divide(new BigDecimal ("25")).intValue();
-amount=amount.remainder(new BigDecimal("25"));
-this.dimes=amount.divide(new BigDecimal("10")).intValue();
-amount=amount.remainder((new BigDecimal("10")));
-this.nickels = amount.divide(new BigDecimal("5")).intValue();
-this.pennies=amount.remainder(new BigDecimal("5")).intValue();
+        this.quarters=amount.divide(new BigDecimal ("25")).intValue();
+        amount=amount.remainder(new BigDecimal("25"));
+        amount=amount.remainder((new BigDecimal("10")));
+        this.nickels = amount.divide(new BigDecimal("5")).intValue();
+        this.pennies=amount.remainder(new BigDecimal("5")).intValue();
 
     }
     //don't need setter, its in constructor its initialized
