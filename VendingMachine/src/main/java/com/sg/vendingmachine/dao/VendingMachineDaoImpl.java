@@ -29,17 +29,18 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public Product getProduct(String productName) {
-        return null;
+        return products.get(productName);
     }
 
     @Override
     public Product updateProduct(String productName, Product product) {
-        return null;
+        return products.replace(productName, product);
     }
 
     @Override
     public Product removeProduct(String productName) {
-        return null;
+        Product removedProduct= products.remove(productName);
+        return removedProduct;
     }
 
     @Override
