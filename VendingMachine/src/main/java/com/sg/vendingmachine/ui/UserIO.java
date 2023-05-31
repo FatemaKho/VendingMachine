@@ -1,4 +1,4 @@
-package main.java.com.sg.vendingmachine.ui;
+package com.sg.vendingmachine.ui;
 
 import java.math.BigDecimal;
 
