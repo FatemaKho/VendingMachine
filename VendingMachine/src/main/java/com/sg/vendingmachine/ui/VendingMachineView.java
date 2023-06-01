@@ -2,6 +2,11 @@ package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dto.Change;
+import com.sg.vendingmachine.dto.Product;
+import com.sg.vendingmachine.service.VendingMachineDataValidationException;
+import com.sg.vendingmachine.service.VendingMachineNoKeyException;
+import com.sg.vendingmachine.service.VendingMachineServiceLayer;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
@@ -15,48 +20,42 @@ public class VendingMachineView {
         scanner = new Scanner(System.in);
     }
     
-    public void displayProducts(List<Integer> ids, VendingMachineDao dao) {
-        System.out.println("Vending Machine Products:");
-        for (Integer id : ids) {
-            io.print(id + dao.getProduct(id).getProductName() +  " - $" + dao.getProduct(id).getPrice() + " (Inventory: " + dao.getProduct(id).getItemsInStock() + ")");
+    public void displayProducts(List<Integer> ids, List<Product> products)  {
+        io.print("Vending Machine Products:");
+        for (int i = 0; i < ids.size(); i++) {
+            io.print(ids.get(i)
+                    + products.get(i).getProductName()
+                    +  " - $" + products.get(i).getPrice()
+                    + " (Inventory: " + products.get(i).getItemsInStock() + ")");
         }
-        System.out.println();
     }
     
     public void displayDepositedAmount(BigDecimal depositedAmount) {
-        System.out.println("Deposited amount: $" + depositedAmount);
-        System.out.println();
+        io.print("Deposited amount: $" + depositedAmount);
     }
     
     public void displayInsufficientFundsMessage() {
-        System.out.println("Insufficient funds. Please deposit more money.");
-        System.out.println();
+        io.print("Insufficient funds. Please deposit more money.");
     }
     
     public void displayNoProductInventoryMessage() {
-        System.out.println("Selected product is out of stock. Please choose another product.");
-        System.out.println();
+        io.print("Selected product is out of stock. Please choose another product.");
     }
     
     public void displayChangeReturned(Change change) {
-        System.out.println("Change returned: ");
-        System.out.println("Quarters: " + change.getQuarters());
-        System.out.println("Dimes: " + change.getDimes());
-        System.out.println("Nickels: " + change.getNickels());
-        System.out.println("Pennies: " + change.getPennies());
-        System.out.println();
+        io.print("Change returned: ");
+        io.print("Quarters: " + change.getQuarters());
+        io.print("Dimes: " + change.getDimes());
+        io.print("Nickels: " + change.getNickels());
+        io.print("Pennies: " + change.getPennies());
     }
     
-    public int promptProductSelection() { 
-        int i = io.readInt("Please select a product");
-        return i;
+    public int promptProductSelection() {
+        return io.readInt("Please select a product");
     }
     
     public BigDecimal promptDepositAmount() {
-        System.out.print("Enter the deposit amount: $");
-        BigDecimal amount = scanner.nextBigDecimal();
-        scanner.nextLine(); // Consume the newline character
-        System.out.println();
+        BigDecimal amount = io.readBigDecimal("Enter the deposit amount: $");
         return amount;
     }
 }
