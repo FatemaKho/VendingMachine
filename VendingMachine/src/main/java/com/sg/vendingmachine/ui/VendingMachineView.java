@@ -5,6 +5,7 @@ import com.sg.vendingmachine.dto.Change;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Map;
 
 public class VendingMachineView {
     private Scanner scanner;
@@ -49,7 +50,6 @@ public class VendingMachineView {
     public int promptProductSelection() { 
         int i = io.readInt("Please select a product");
         return i;
-        
     }
     
     public BigDecimal promptDepositAmount() {
