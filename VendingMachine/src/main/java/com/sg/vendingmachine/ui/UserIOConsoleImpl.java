@@ -200,7 +200,7 @@ public class UserIOConsoleImpl implements UserIO {
     }
     @Override
     public BigDecimal readBigDecimal(String prompt){
-        return new BigDecimal("0");
+        return new BigDecimal(prompt);
     }
     @Override
     public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max){

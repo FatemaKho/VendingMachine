@@ -5,14 +5,16 @@ import com.sg.vendingmachine.dto.Product;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface VendingMachineServiceLayer {
     Change remainingChange(BigDecimal amount, Product product);
-    Product addProduct(String productName, Product product);
+    void addProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachineDuplicateIdException;
     ArrayList<Product> getAllProducts();
-    ArrayList<String> getAllProductNames();
+    ArrayList<Integer> getAllProductIds();
 
-    Product getProduct(String productName);
-    Product updateProduct(String productName, Product product);
-    Product removeProduct(String productName);
+    Product getProduct(int productId) throws VendingMachineNoKeyException;
+    Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException;
+    Product removeProduct(int productId) throws VendingMachineNoKeyException;
+
 }

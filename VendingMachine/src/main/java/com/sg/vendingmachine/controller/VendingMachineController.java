@@ -22,7 +22,7 @@ public class VendingMachineController {
 
     public void run() {
         boolean keepGoing = true;
-        String selection = view.promptItemSelection();
+        int selection = view.promptItemSelection();
         BigDecimal money = view.promptDepositAmount();
 
         while (keepGoing) {
