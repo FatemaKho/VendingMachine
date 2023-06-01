@@ -50,6 +50,8 @@ public class Product {
         this.itemsInStock = itemsInStock;
     }
 
+    public void decreaseStockItem() {this.itemsInStock--;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
