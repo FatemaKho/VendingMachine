@@ -49,6 +49,12 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
         validateProductData(product);
         dao.addProduct(productId, product);
+        try {
+            auditDao.writeAuditEntry(
+                    "Product " +product.getProductName() + " CREATED.");
+        } catch (VendingMachinePersistenceException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -86,6 +92,12 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public Product removeProduct(int productId) throws VendingMachineNoKeyException, VendingMachinePersistenceException  {
         Product product =  dao.removeProduct(productId);
         if (product == null) throw new VendingMachineNoKeyException("ID not found");
+        try {
+            auditDao.writeAuditEntry(
+                    "Product " + product.getProductId() + " REMOVED.");
+        } catch (VendingMachinePersistenceException e) {
+            throw new RuntimeException(e);
+        }
         return product;
     }
 
