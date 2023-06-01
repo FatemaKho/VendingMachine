@@ -49,7 +49,11 @@ public class VendingMachineController {
 
     private void decreaseStockItem(Product product) {
         try {
-            service.decreaseStockItem(product);
+            if (product.getItemsInStock() == 0) {
+                view.displayNoProductInventoryMessage();
+            } else {
+                service.decreaseStockItem(product);
+            }
         } catch (VendingMachineDataValidationException e) {
             e.getMessage();
         }
@@ -62,8 +66,12 @@ public class VendingMachineController {
         } else {
             decreaseStockItem(product);
             view.displayDepositedAmount(money);
-            
-            view.displayChangeReturned(change);
+            view.displayItem(product);
+            if (product.getItemsInStock() != 0) {
+                view.displayChangeReturned(change);
+            } else {
+                view.displayChangeReturned(new Change(money));
+            }
         }
     }
 
@@ -71,6 +79,7 @@ public class VendingMachineController {
         try {
             service.addProduct(1, new Product("1", "Chips", new BigDecimal("5.00"), 10));
             service.addProduct(2, new Product("2", "Lays", new BigDecimal("2.50"), 10));
+            service.addProduct(3, new Product("3", "Apple", new BigDecimal("4.00"), 1));
         } catch (VendingMachineDataValidationException | VendingMachineDuplicateIdException e) {
             e.getMessage();
         }
