@@ -61,4 +61,11 @@ public class VendingMachineView {
        String num = io.readString("Enter the deposit amount: $");
        return io.readBigDecimal(num);
     }
+ 
+    public void displayItem(Product product) {
+        io.print("Product Details:");
+        io.print("Name: " + product.getProductName());
+        io.print("Price: $" + product.getPrice());
+        io.print("Inventory: " + product.getItemsInStock());
+    }
 }
