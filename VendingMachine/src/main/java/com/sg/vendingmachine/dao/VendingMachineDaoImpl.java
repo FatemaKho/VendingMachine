@@ -45,6 +45,13 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     }
 
     @Override
+    public void decreaseStockItem(Product product) {
+        int numItems = product.getItemsInStock();
+        numItems--;
+        product.setItemsInStock(numItems);
+    }
+
+    @Override
     public Map<String, Product> loadProductsFromFile() throws VendingMachinePersistenceException {
         return null;
     }
