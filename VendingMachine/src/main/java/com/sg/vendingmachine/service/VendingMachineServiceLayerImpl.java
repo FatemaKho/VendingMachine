@@ -66,6 +66,12 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return product;
     }
 
+    @Override
+    public void decreaseStockItem(Product product) throws VendingMachineDataValidationException {
+        validateProductData(product);
+        decreaseStockItem(product);
+    }
+
     private void validateProductData(Product product) throws VendingMachineDataValidationException{
         if (product.getPrice().compareTo(new BigDecimal("0")) <= 0
                 || product.getProductName().trim().length() == 0
