@@ -62,7 +62,7 @@ public class VendingMachineController {
         } else {
             decreaseStockItem(product);
             view.displayDepositedAmount(money);
-            //display item selection
+            
             view.displayChangeReturned(change);
         }
     }

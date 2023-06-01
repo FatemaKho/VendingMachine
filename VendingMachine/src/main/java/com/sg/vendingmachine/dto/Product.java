@@ -26,7 +26,7 @@ public class Product {
 
     }
 
-    public Integer getProductId() {
+    public String getProductId() {
         return productId;
     }
 
