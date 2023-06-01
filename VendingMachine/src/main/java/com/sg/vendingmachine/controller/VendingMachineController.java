@@ -11,8 +11,6 @@ import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
 
 public class VendingMachineController {
     private VendingMachineView view;
@@ -64,7 +62,6 @@ public class VendingMachineController {
         if (change == null) {
             view.displayInsufficientFundsMessage();
         } else {
-            decreaseStockItem(product);
             view.displayDepositedAmount(money);
             view.displayItem(product);
             if (product.getItemsInStock() != 0) {
@@ -72,6 +69,7 @@ public class VendingMachineController {
             } else {
                 view.displayChangeReturned(new Change(money));
             }
+            decreaseStockItem(product);
         }
     }
 
