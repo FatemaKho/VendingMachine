@@ -4,6 +4,8 @@ import com.sg.vendingmachine.dto.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 public class VendingMachineView {
     private UserIO io = new UserIOConsoleImpl();
 
@@ -27,7 +29,7 @@ public class VendingMachineView {
         // Display the change returned to the user
         // ...
     }
-    public String promptItemSelection() {
+    public int promptItemSelection() {
         // Prompt the user to select an item and return the input
         // ...
     }
