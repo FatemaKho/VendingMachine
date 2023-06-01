@@ -4,6 +4,7 @@ import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 
 public class VendingMachineAuditDaoImpl implements VendingMachineAuditDao{
     public static final String AUDIT_FILE = "audit.txt";
@@ -17,7 +18,10 @@ public class VendingMachineAuditDaoImpl implements VendingMachineAuditDao{
         } catch(IOException e) {
             throw new VendingMachinePersistenceException("Could not persist audit information", e);
         }
-    }
+        LocalDateTime timeStamp= LocalDateTime.now();
+        System.out.println(timeStamp.toString() + " : " + entry);
+        out.flush();
 
+    }
 
 }
