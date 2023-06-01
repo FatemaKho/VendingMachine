@@ -74,7 +74,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentProduct = new Product(currentLine);
-            products.put(currentProduct.getProductId(), currentProduct);
+            products.put(Integer.parseInt(currentProduct.getProductId()), currentProduct);
         }
         scanner.close();
         return products;
