@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface VendingMachineServiceLayer {
+    Map<String, Product> loadProductsInStock() throws VendingMachinePersistenceException;
     Change remainingChange(BigDecimal amount, Product product);
     void addProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachineDuplicateIdException;
     ArrayList<Product> getAllProducts();

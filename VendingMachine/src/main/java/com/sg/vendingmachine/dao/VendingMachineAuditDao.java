@@ -8,5 +8,6 @@ import java.util.Map;
 
 public interface VendingMachineAuditDao {
 
+    void writeAuditEntry(String entry) throws VendingMachinePersistenceException;
 }
 
