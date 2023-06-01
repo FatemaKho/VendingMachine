@@ -18,16 +18,19 @@ public class VendingMachineView {
     
     public VendingMachineView() {
         scanner = new Scanner(System.in);
+        io = new UserIOConsoleImpl();
     }
     
-    public void displayProducts(List<Integer> ids, List<Product> products)  {
+    public int displayProducts(List<Integer> ids, List<Product> products)  {
         io.print("Vending Machine Products:");
         for (int i = 0; i < ids.size(); i++) {
-            io.print(ids.get(i)
+            io.print("#" + ids.get(i)
+                    + " "
                     + products.get(i).getProductName()
                     +  " - $" + products.get(i).getPrice()
                     + " (Inventory: " + products.get(i).getItemsInStock() + ")");
         }
+        return io.readInt("0: Continue \n1: Exit");
     }
     
     public void displayDepositedAmount(BigDecimal depositedAmount) {
@@ -55,7 +58,7 @@ public class VendingMachineView {
     }
     
     public BigDecimal promptDepositAmount() {
-        BigDecimal amount = io.readBigDecimal("Enter the deposit amount: $");
-        return amount;
+       String num = io.readString("Enter the deposit amount: $");
+       return io.readBigDecimal(num);
     }
 }
