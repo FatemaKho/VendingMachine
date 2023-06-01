@@ -82,4 +82,8 @@ public class VendingMachineView {
         io.print("Inventory: " + product.getItemsInStock());
         io.print("");
     }
+
+    public void displayErrorMessage(String errorMessage) {
+        io.print(errorMessage);
+    }
 }

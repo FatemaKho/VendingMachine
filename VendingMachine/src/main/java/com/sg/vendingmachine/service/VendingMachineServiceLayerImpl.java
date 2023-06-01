@@ -42,7 +42,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public void addProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachineDuplicateIdException{
+    public void addProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachineDuplicateIdException, VendingMachinePersistenceException{
         if (dao.getProduct(productId) != null) {
             throw new VendingMachineDuplicateIdException("Error: could not add product. Product with ID# " + productId + " already exists.");
         }
@@ -53,24 +53,24 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public ArrayList<Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() throws VendingMachinePersistenceException {
         return dao.getAllProducts();
     }
 
     @Override
-    public ArrayList<Integer> getAllProductIds() {
+    public ArrayList<Integer> getAllProductIds() throws VendingMachinePersistenceException  {
         return dao.getAllProductIds();
     }
 
     @Override
-    public Product getProduct(int productId) throws VendingMachineNoKeyException {
+    public Product getProduct(int productId) throws VendingMachineNoKeyException, VendingMachinePersistenceException  {
         Product product = dao.getProduct(productId);
         if(product == null) throw new VendingMachineNoKeyException("ID not found");
         return product;
     }
 
     @Override
-    public Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException{
+    public Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachinePersistenceException {
         validateProductData(product);
         dao.updateProduct(productId, product);
         try {
@@ -83,19 +83,19 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public Product removeProduct(int productId) throws VendingMachineNoKeyException {
+    public Product removeProduct(int productId) throws VendingMachineNoKeyException, VendingMachinePersistenceException  {
         Product product =  dao.removeProduct(productId);
         if (product == null) throw new VendingMachineNoKeyException("ID not found");
         return product;
     }
 
     @Override
-    public void decreaseStockItem(Product product) throws VendingMachineDataValidationException {
+    public void decreaseStockItem(Product product) throws VendingMachineDataValidationException, VendingMachinePersistenceException  {
         validateProductData(product);
         dao.decreaseStockItem(product);
     }
 
-    private void validateProductData(Product product) throws VendingMachineDataValidationException{
+    private void validateProductData(Product product) throws VendingMachineDataValidationException {
         if (product.getPrice().compareTo(new BigDecimal("0")) <= 0
                 || product.getProductName().trim().length() == 0
                 || product.getProductName() == null
