@@ -1,7 +1,12 @@
 package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dto.Change;
+<<<<<<< Updated upstream
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
+=======
+import com.sg.vendingmachine.dto.Product;
+import com.sg.vendingmachine.service.*;
+>>>>>>> Stashed changes
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
@@ -20,6 +25,7 @@ public class VendingMachineController {
         this.view = view;
     }
 
+<<<<<<< Updated upstream
     public void run() {
         boolean keepGoing = true;
         int selection = view.promptItemSelection();
@@ -27,9 +33,74 @@ public class VendingMachineController {
 
         while (keepGoing) {
 
+=======
+    public void run() throws VendingMachinePersistenceException {
+        addProducts();
+        int cont = 0;
+        try {
+            while (cont == 0) {
+                cont = view.displayProducts(service.getAllProductIds(), service.getAllProducts());
+                if (cont == 1) break;
+                BigDecimal money = view.promptDepositAmount();
+                int selection = view.promptProductSelection();
+                Product product = getProductFromId(selection);
+                getChange(money, product);
+            }
+        } catch (VendingMachinePersistenceException e) {
+            view.displayErrorMessage(e.getMessage());
+        }
+    }
+
+    private Product getProductFromId(int id) throws VendingMachinePersistenceException {
+        try {
+            Product product = service.getProduct(id);
+            return product;
+        } catch (VendingMachineNoKeyException e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    private void decreaseStockItem(Product product) throws VendingMachinePersistenceException {
+        try {
+            if (product.getItemsInStock() == 0) {
+                view.displayNoProductInventoryMessage();
+            } else {
+                service.decreaseStockItem(product);
+            }
+        } catch (VendingMachineDataValidationException e) {
+            e.getMessage();
+>>>>>>> Stashed changes
         }
 
+<<<<<<< Updated upstream
 
+=======
+    private void getChange(BigDecimal money, Product product) throws VendingMachinePersistenceException {
+        Change change = service.remainingChange(money, product);
+        if (change == null) {
+            view.displayInsufficientFundsMessage();
+        } else {
+            view.displayDepositedAmount(money);
+            view.displayItem(product);
+            if (product.getItemsInStock() != 0) {
+                view.displayChangeReturned(change);
+            } else {
+                view.displayChangeReturned(new Change(money));
+            }
+            decreaseStockItem(product);
+        }
+    }
+
+    private void addProducts() throws VendingMachinePersistenceException {
+        try {
+            service.addProduct(1, new Product("1", "Chips", new BigDecimal("5.00"), 10));
+            service.addProduct(2, new Product("2", "Lays", new BigDecimal("2.50"), 10));
+            service.addProduct(3, new Product("3", "Apple", new BigDecimal("4.00"), 1));
+        } catch (VendingMachineDataValidationException | VendingMachineDuplicateIdException e) {
+            e.getMessage();
+        }
+>>>>>>> Stashed changes
     }
 
 }

@@ -23,7 +23,6 @@ public class Product {
         this.productName=fields[1];
         this.price=new BigDecimal(fields[2]);
         this.itemsInStock=Integer.parseInt(fields[3]);//could be null pointer
-
     }
 
     public String getProductId() {
@@ -84,6 +83,6 @@ public class Product {
     }
     //check
     public String marshallProductAsText(){
-        return productId + DELIMITER +productName+DELIMITER+price;
+        return productId + DELIMITER +productName+DELIMITER+price+DELIMITER+itemsInStock;
     }
 }

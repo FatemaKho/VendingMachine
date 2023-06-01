@@ -37,6 +37,7 @@ public class VendingMachineView {
         // Prompt the user to enter the deposit amount and return the input
         // ...
     }
+<<<<<<< Updated upstream
 }
 
 //import java.math.BigDecimal;
@@ -98,3 +99,19 @@ public class VendingMachineView {
     //}
 //}
 //
+=======
+ 
+    public void displayItem(Product product) {
+        io.print("");
+        io.print("Product Details:");
+        io.print("Name: " + product.getProductName());
+        io.print("Price: $" + product.getPrice());
+        io.print("Inventory: " + product.getItemsInStock());
+        io.print("");
+    }
+
+    public void displayErrorMessage(String errorMessage) {
+        io.print(errorMessage);
+    }
+}
+>>>>>>> Stashed changes
