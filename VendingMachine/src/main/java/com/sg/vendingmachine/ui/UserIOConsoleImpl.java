@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.ui;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 public class UserIOConsoleImpl implements UserIO {
 
@@ -200,7 +201,7 @@ public class UserIOConsoleImpl implements UserIO {
     }
     @Override
     public BigDecimal readBigDecimal(String prompt){
-        return new BigDecimal(prompt);
+        return new BigDecimal(prompt).setScale(2, RoundingMode.HALF_UP);
     }
     @Override
     public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max){
