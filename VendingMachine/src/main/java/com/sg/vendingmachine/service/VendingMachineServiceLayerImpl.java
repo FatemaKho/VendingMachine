@@ -72,7 +72,14 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException{
         validateProductData(product);
+        dao.updateProduct(productId, product);
+        try {
+            auditDao.writeAuditEntry("Product Id: "+ product.getProductId());
+        } catch (VendingMachinePersistenceException e) {
+            throw new RuntimeException(e);
+        }
         return dao.updateProduct(productId, product);
+
     }
 
     @Override
