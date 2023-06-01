@@ -3,8 +3,13 @@ package com.sg.vendingmachine.dao;
 import com.sg.vendingmachine.dto.Product;
 import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 
+
 import java.io.*;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
@@ -31,10 +36,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public ArrayList<Integer> getAllProductIds()  {
-        ArrayList<Integer> keyList = new ArrayList<>();
-        keyList.addAll(products.keySet());
-
-        return keyList;
+        return products.keySet().stream()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     @Override
     public Product getProduct(int productId) {
@@ -71,29 +74,34 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentProduct = new Product(currentLine);
-            products.put(currentProduct.getProductName(), currentProduct);
+            products.put(currentProduct.getProductId(), currentProduct);
         }
         scanner.close();
         return products;
     }
+        public void decreaseStockItem (Product product){
+            int numItems = product.getItemsInStock();
+            numItems--;
+            product.setItemsInStock(numItems);
+        }
 
-    @Override
-    public void writeProductsToFile() throws VendingMachinePersistenceException {
-        PrintWriter out;
-        try{
-            out = new PrintWriter (new FileWriter(PRODUCTS_FILE));
-        } catch (IOException ex) {
-            throw new VendingMachinePersistenceException(
-                    "Could not save product data", ex);
+
+        @Override
+        public void writeProductsToFile () throws VendingMachinePersistenceException {
+            PrintWriter out;
+            try {
+                out = new PrintWriter(new FileWriter(PRODUCTS_FILE));
+            } catch (IOException ex) {
+                throw new VendingMachinePersistenceException(
+                        "Could not save product data", ex);
+            }
+            String productAsText;
+            List<Product> productList = this.getAllProducts();
+            for (Product currentProduct : productList) {
+                productAsText = currentProduct.marshallProductAsText();
+                out.println(productAsText);
+                out.flush();
+            }
+            out.close();
         }
-        String productAsText;
-        List<Product> productList = this.getAllProducts();
-        for (Product currentProduct : productList) {
-            productAsText = currentProduct.marshallProductAsText();
-            out.println(productAsText);
-            out.flush();
-        }
-        out.close();
     }
-
-}

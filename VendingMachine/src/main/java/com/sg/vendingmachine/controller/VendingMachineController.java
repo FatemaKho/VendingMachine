@@ -1,6 +1,10 @@
 package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dto.Change;
+import com.sg.vendingmachine.dto.Product;
+import com.sg.vendingmachine.service.VendingMachineDataValidationException;
+import com.sg.vendingmachine.service.VendingMachineDuplicateIdException;
+import com.sg.vendingmachine.service.VendingMachineNoKeyException;
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
@@ -21,15 +25,56 @@ public class VendingMachineController {
     }
 
     public void run() {
-        boolean keepGoing = true;
-        int selection = view.promptItemSelection();
-        BigDecimal money = view.promptDepositAmount();
-
-        while (keepGoing) {
-
+        addProducts();
+        int cont = 0;
+        while (cont == 0) {
+            cont = view.displayProducts(service.getAllProductIds(), service.getAllProducts());
+            if (cont == 1) break;
+            BigDecimal money = view.promptDepositAmount();
+            int selection = view.promptProductSelection();
+            Product product = getProductFromId(selection);
+            getChange(money, product);
         }
-
-
     }
+
+    private Product getProductFromId(int id)  {
+        try {
+            Product product = service.getProduct(id);
+            return product;
+        } catch (VendingMachineNoKeyException e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    private void decreaseStockItem(Product product) {
+        try {
+            service.decreaseStockItem(product);
+        } catch (VendingMachineDataValidationException e) {
+            e.getMessage();
+        }
+    }
+
+    private void getChange(BigDecimal money, Product product) {
+        Change change = service.remainingChange(money, product);
+        if (change == null) {
+            view.displayInsufficientFundsMessage();
+        } else {
+            decreaseStockItem(product);
+            view.displayDepositedAmount(money);
+            //display item selection
+            view.displayChangeReturned(change);
+        }
+    }
+
+    private void addProducts() {
+        try {
+            service.addProduct(1, new Product("1", "Chips", new BigDecimal("5.00"), 10));
+            service.addProduct(2, new Product("2", "Lays", new BigDecimal("2.50"), 10));
+        } catch (VendingMachineDataValidationException | VendingMachineDuplicateIdException e) {
+            e.getMessage();
+        }
+    }
+
 
 }

@@ -16,5 +16,6 @@ public interface VendingMachineDao {
     Product removeProduct(int productId);
     TreeMap<Integer, Product> loadProductsFromFile() throws VendingMachinePersistenceException;
     void writeProductsToFile() throws VendingMachinePersistenceException;
+    void decreaseStockItem(Product product);
 
 }

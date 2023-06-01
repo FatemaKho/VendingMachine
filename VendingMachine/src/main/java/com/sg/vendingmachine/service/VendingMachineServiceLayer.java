@@ -18,4 +18,6 @@ public interface VendingMachineServiceLayer {
     Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException;
     Product removeProduct(int productId) throws VendingMachineNoKeyException;
 
+    void decreaseStockItem(Product product) throws VendingMachineDataValidationException;
+
 }

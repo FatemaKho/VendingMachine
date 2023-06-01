@@ -37,7 +37,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         if (amount.compareTo(product.getPrice()) < 0) {
             return null;
         } else {
-            return new Change(amount);
+            return new Change(amount.subtract(product.getPrice()));
         }
     }
 
@@ -80,6 +80,12 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         Product product =  dao.removeProduct(productId);
         if (product == null) throw new VendingMachineNoKeyException("ID not found");
         return product;
+    }
+
+    @Override
+    public void decreaseStockItem(Product product) throws VendingMachineDataValidationException {
+        validateProductData(product);
+        dao.decreaseStockItem(product);
     }
 
     private void validateProductData(Product product) throws VendingMachineDataValidationException{
