@@ -10,14 +10,14 @@ import java.util.Map;
 public interface VendingMachineServiceLayer {
     Map<String, Product> loadProductsInStock() throws VendingMachinePersistenceException;
     Change remainingChange(BigDecimal amount, Product product);
-    void addProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachineDuplicateIdException;
-    ArrayList<Product> getAllProducts();
-    ArrayList<Integer> getAllProductIds();
+    void addProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachineDuplicateIdException, VendingMachinePersistenceException;
+    ArrayList<Product> getAllProducts() throws VendingMachinePersistenceException;
+    ArrayList<Integer> getAllProductIds() throws VendingMachinePersistenceException;
 
-    Product getProduct(int productId) throws VendingMachineNoKeyException;
-    Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException;
-    Product removeProduct(int productId) throws VendingMachineNoKeyException;
+    Product getProduct(int productId) throws VendingMachineNoKeyException, VendingMachinePersistenceException;
+    Product updateProduct(int productId, Product product) throws VendingMachineDataValidationException, VendingMachinePersistenceException;
+    Product removeProduct(int productId) throws VendingMachineNoKeyException, VendingMachinePersistenceException;
 
-    void decreaseStockItem(Product product) throws VendingMachineDataValidationException;
+    void decreaseStockItem(Product product) throws VendingMachineDataValidationException, VendingMachinePersistenceException;
 
 }

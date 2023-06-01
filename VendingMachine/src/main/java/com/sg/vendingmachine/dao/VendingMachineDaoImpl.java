@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
     public final String PRODUCTS_FILE;
+    public static final String DELIMITER = "::";
     private TreeMap<Integer, Product> products= new TreeMap<>();
 
     public VendingMachineDaoImpl() {
@@ -23,34 +24,43 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         PRODUCTS_FILE = productsTextFile;
     }
     @Override
-    public Product addProduct(int productId, Product product) {
+    public Product addProduct(int productId, Product product) throws VendingMachinePersistenceException {
+        loadProductsFromFile();
         Product newProduct = products.put(productId, product);
+        writeProductsToFile();
         return newProduct;
     }
 
     @Override
-    public ArrayList<Product> getAllProducts() {
-        return new ArrayList<Product>(products.values());
-    }
+    public ArrayList<Product> getAllProducts() throws VendingMachinePersistenceException  {
+        loadProductsFromFile();
+        return new ArrayList<Product>(products.values());    }
 
     @Override
-    public ArrayList<Integer> getAllProductIds()  {
+    public ArrayList<Integer> getAllProductIds() throws VendingMachinePersistenceException  {
+        loadProductsFromFile();
         return products.keySet().stream()
                 .collect(Collectors.toCollection(ArrayList::new));
     }
     @Override
-    public Product getProduct(int productId) {
+    public Product getProduct(int productId) throws VendingMachinePersistenceException  {
+        loadProductsFromFile();
         return products.get(productId);
     }
 
     @Override
-    public Product updateProduct(int productId, Product product) {
-        return products.replace(productId, product);
+    public Product updateProduct(int productId, Product product) throws VendingMachinePersistenceException  {
+        loadProductsFromFile();
+        Product updatedProduct = products.replace(productId, product);
+        writeProductsToFile();
+        return updatedProduct;
     }
 
     @Override
-    public Product removeProduct(int productId) {
+    public Product removeProduct(int productId) throws VendingMachinePersistenceException {
+        loadProductsFromFile();
         Product removedProduct= products.remove(productId);
+        writeProductsToFile();
         return removedProduct;
     }
 
@@ -78,10 +88,12 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         scanner.close();
         return products;
         }
-        public void decreaseStockItem (Product product){
+        public void decreaseStockItem (Product product) throws VendingMachinePersistenceException {
+            loadProductsFromFile();
             int numItems = product.getItemsInStock();
             numItems--;
             product.setItemsInStock(numItems);
+            writeProductsToFile();
         }
 
 

@@ -84,6 +84,6 @@ public class Product {
     }
     //check
     public String marshallProductAsText(){
-        return productId + DELIMITER +productName+DELIMITER+price;
+        return productId + DELIMITER +productName+DELIMITER+price+DELIMITER+itemsInStock;
     }
 }
