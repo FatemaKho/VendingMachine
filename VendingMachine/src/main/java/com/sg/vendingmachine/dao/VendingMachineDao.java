@@ -4,7 +4,7 @@ import com.sg.vendingmachine.dto.Product;
 import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.TreeMap;
 
 public interface VendingMachineDao {
     Product addProduct(int productId, Product product);
@@ -14,7 +14,7 @@ public interface VendingMachineDao {
     Product getProduct(int productId);
     Product updateProduct(int productId, Product product);
     Product removeProduct(int productId);
-    Map<String, Product> loadProductsFromFile() throws VendingMachinePersistenceException;
+    TreeMap<Integer, Product> loadProductsFromFile() throws VendingMachinePersistenceException;
     void writeProductsToFile() throws VendingMachinePersistenceException;
 
 }
