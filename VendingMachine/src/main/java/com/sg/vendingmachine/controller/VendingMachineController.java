@@ -20,7 +20,6 @@ public class VendingMachineController {
         this.view = view;
     }
 
-
     public void run() {
         boolean keepGoing = true;
         String selection = view.promptItemSelection();
