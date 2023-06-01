@@ -7,7 +7,6 @@ import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 import java.io.*;
 import java.util.*;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -78,7 +77,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         }
         scanner.close();
         return products;
-    }
+        }
         public void decreaseStockItem (Product product){
             int numItems = product.getItemsInStock();
             numItems--;

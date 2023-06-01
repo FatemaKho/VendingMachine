@@ -92,9 +92,22 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         if (product.getPrice().compareTo(new BigDecimal("0")) <= 0
                 || product.getProductName().trim().length() == 0
                 || product.getProductName() == null
-                || product.getItemsInStock() <= 0) {
+                || product.getItemsInStock() < 0
+                || isNumeric(product.getProductId()) == false) {
             throw new VendingMachineDataValidationException("Error: Missing information or invalid data inputs");
         }
+    }
+
+    private static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int i = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
 }
