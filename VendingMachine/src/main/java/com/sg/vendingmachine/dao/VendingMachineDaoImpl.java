@@ -6,6 +6,7 @@ import com.sg.vendingmachine.service.VendingMachinePersistenceException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
@@ -24,10 +25,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     @Override
     public ArrayList<Integer> getAllProductIds()  {
-        ArrayList<Integer> keyList = new ArrayList<>();
-        keyList.addAll(products.keySet());
-
-        return keyList;
+        return products.keySet().stream()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     @Override
     public Product getProduct(int productId) {
