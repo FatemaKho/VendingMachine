@@ -61,15 +61,19 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
-    void addProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
-        Product testProduct = new Product("3", "Gumball", new BigDecimal("5.00"), 5);
+void addProduct() throws VendingMachinePersistenceException, VendingMachineDataValidationException, VendingMachineDuplicateIdException {
 
-        service.addProduct(3, testProduct);
+    int productId = 1;
+    Product product = new Product("1", "Chips", new BigDecimal("5.00"), 10);
 
-        Product addedProduct = service.getProduct(3);
+    Product addedProduct = service.addProduct(productId, product);
 
-        assertEquals(testProduct, addedProduct, "The test product was added to the products treemap.");
-    }
+    assertNotNull(addedProduct);
+    assertEquals(productId, addedProduct.getProductId().intValue());
+    assertEquals(product.getProductName(), addedProduct.getProductName());
+    assertEquals(product.getPrice(), addedProduct.getPrice());
+    assertEquals(product.getItemsInStock(), addedProduct.getItemsInStock());
+}
 
     @Test
     void getAllProductIds() throws VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
@@ -103,7 +107,7 @@ class VendingMachineServiceLayerImplTest {
         assertTrue(productList.contains(p1));
         assertTrue(productList.contains(p2));
         assertTrue(productList.contains(p3));
-    }
+
 
     @Test
     void getProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
