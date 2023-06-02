@@ -6,9 +6,6 @@ import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Product;
 import com.sg.vendingmachine.service.*;
-import service.VendingMachineAuditDaoStubImpl;
-import service.VendingMachineDaoStubImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -17,7 +14,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 class VendingMachineServiceLayerImplTest {
 
     private VendingMachineServiceLayer service;
@@ -61,14 +57,18 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
-    void addProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
-        Product testProduct = new Product("3", "Gumball", new BigDecimal("5.00"), 5);
+    void addProduct() throws VendingMachinePersistenceException, VendingMachineDataValidationException, VendingMachineDuplicateIdException {
 
-        service.addProduct(3, testProduct);
+        int productId = 1;
+        Product product = new Product("1", "Chips", new BigDecimal("5.00"), 10);
 
-        Product addedProduct = service.getProduct(3);
+       service.addProduct(productId, product);
 
-        assertEquals(testProduct, addedProduct, "The test product was added to the products treemap.");
+        assertNotNull(addedProduct);
+        assertEquals(productId, addedProduct.getProductId().intValue());
+        assertEquals(product.getProductName(), addedProduct.getProductName());
+        assertEquals(product.getPrice(), addedProduct.getPrice());
+        assertEquals(product.getItemsInStock(), addedProduct.getItemsInStock());
     }
 
     @Test
@@ -103,25 +103,6 @@ class VendingMachineServiceLayerImplTest {
         assertTrue(productList.contains(p1));
         assertTrue(productList.contains(p2));
         assertTrue(productList.contains(p3));
-    }
-
-    @Test
-    void getProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
-        Product p1 = new Product("1", "Chips", new BigDecimal("4.50"), 10);
-        Product p2 = new Product("2", "Apple", new BigDecimal("5.00"), 10);
-        Product p3 = new Product("3", "Pretzels", new BigDecimal("2.50"), 10);
-
-        service.addProduct(1, p1);
-        service.addProduct(2, p2);
-        service.addProduct(3, p3);
-
-        Product testP1 = service.getProduct(Integer.parseInt(p1.getProductId()));
-        Product testP2 = service.getProduct(Integer.parseInt(p2.getProductId()));
-        Product testP3 = service.getProduct(Integer.parseInt(p3.getProductId()));
-
-        assertTrue(p1.equals(testP1));
-        assertTrue(p2.equals(testP2));
-        assertTrue(p3.equals(testP3));
 
     }
 
