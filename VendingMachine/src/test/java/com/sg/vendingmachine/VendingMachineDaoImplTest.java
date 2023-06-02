@@ -4,6 +4,7 @@ import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachineDaoImpl;
 import com.sg.vendingmachine.dto.Product;
 import com.sg.vendingmachine.service.VendingMachinePersistenceException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ public class VendingMachineDaoImplTest {
     public VendingMachineDaoImplTest() {
 
     }
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     public void setUp () throws Exception {
         String testFile = "testproducts.txt";
         //blank file
@@ -37,6 +38,9 @@ public class VendingMachineDaoImplTest {
         Product p1 = new Product("1", "Chips", bd, 1);
         bd = new BigDecimal("2.50");
         Product p2 = new Product("2", "Water", bd, 1);
+        //Add to testproducts.txt
+        testDao.addProduct(1,p1);
+        testDao.addProduct(2,p2);
         //Result
         Map<Integer, Product> result = testDao.loadProductsFromFile();
         //Expected Result
@@ -68,7 +72,7 @@ public class VendingMachineDaoImplTest {
         Product p1 = new Product("1", "Chips", bd, 1);
         bd = new BigDecimal ("2.50");
         Product p2 = new Product("2", "Water", bd, 1);
-                testDao.addProduct(Integer.parseInt(p1.getProductId()),p1);
+        testDao.addProduct(Integer.parseInt(p1.getProductId()),p1);
         testDao.addProduct(Integer.parseInt(p2.getProductId()),p2);
         //Result
         List<Product> result = testDao.getAllProducts();
