@@ -54,14 +54,14 @@ public class VendingMachineView {
         io.print("Selected product is out of stock. Please choose another product.");
         io.print("");
     }
-    
+
     public void displayChangeReturned(Change change) {
         io.print("");
         io.print("Change returned: ");
-        io.print("Quarters: " + change.getQuarters());
-        io.print("Dimes: " + change.getDimes());
-        io.print("Nickels: " + change.getNickels());
-        io.print("Pennies: " + change.getPennies());
+        io.print(CoinValue.QUARTERS + ": " + change.getQuarters());
+        io.print(CoinValue.DIMES + ": " + change.getDimes());
+        io.print(CoinValue.NICKELS + ": " + change.getNickels());
+        io.print(CoinValue.PENNIES + ": " + change.getPennies());
         io.print("");
     }
     

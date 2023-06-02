@@ -6,18 +6,14 @@ import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Product;
 import com.sg.vendingmachine.service.*;
-import service.VendingMachineAuditDaoStubImpl;
-import service.VendingMachineDaoStubImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 class VendingMachineServiceLayerImplTest {
 
     private VendingMachineServiceLayer service;
@@ -61,6 +57,7 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
+
     void addProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
         Product testProduct = new Product("3", "Gumball", new BigDecimal("5.00"), 5);
 
@@ -104,6 +101,8 @@ class VendingMachineServiceLayerImplTest {
         assertTrue(productList.contains(p1));
         assertTrue(productList.contains(p2));
         assertTrue(productList.contains(p3));
+
+
     }
 
     @Test

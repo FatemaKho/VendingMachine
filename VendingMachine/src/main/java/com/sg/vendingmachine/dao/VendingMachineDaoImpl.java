@@ -95,6 +95,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             int numItems = product.getItemsInStock();
             numItems--;
             product.setItemsInStock(numItems);
+            updateProduct(Integer.valueOf(product.getProductId()), product);
             writeProductsToFile();
         }
 
