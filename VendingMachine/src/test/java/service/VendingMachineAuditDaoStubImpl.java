@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.service;
+package service;
 
 import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.service.VendingMachinePersistenceException;

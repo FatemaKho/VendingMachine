@@ -16,9 +16,9 @@ import java.util.List;
 public class VendingMachineDaoImplTest {
     VendingMachineDao testDao;
 
-public VendingMachineDaoImplTest() {
+    public VendingMachineDaoImplTest() {
 
-}
+    }
     @org.junit.jupiter.api.BeforeEach
     public void setUp () throws Exception {
         String testFile = "testproducts.txt";
@@ -47,8 +47,11 @@ public VendingMachineDaoImplTest() {
         removedProduct=testDao.removeProduct(Integer.parseInt(prod2.getProductId()));
         assertEquals(removedProduct, prod2, "The product 2 was removed.");
 
-
     }
 
+    @Test
+    public void testUpdateProduct() {
+
+    }
 
 }

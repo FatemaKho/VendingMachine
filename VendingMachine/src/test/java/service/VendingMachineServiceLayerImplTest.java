@@ -1,14 +1,18 @@
-package com.sg.vendingmachine.service;
+package service;
 
 import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
 
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Product;
+import com.sg.vendingmachine.service.*;
+import service.VendingMachineAuditDaoStubImpl;
+import service.VendingMachineDaoStubImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -68,11 +72,37 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
-    void getAllProducts() {
+    void getAllProductIds() throws VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
+        // Arrange
+        service.addProduct(1, new Product("1", "Chips", new BigDecimal("4.50"), 10));
+        service.addProduct(2, new Product("2", "Apple", new BigDecimal("5.00"), 10));
+        service.addProduct(3, new Product("3", "Pretzels", new BigDecimal("2.50"), 10));
+        // Act
+        List<Integer> productIdList = service.getAllProductIds();
+        // Assert
+        assertNotNull(productIdList);
+        assertEquals(3, productIdList.size());
+        assertTrue(productIdList.contains(1));
+        assertTrue(productIdList.contains(2));
+        assertTrue(productIdList.contains(3));
     }
-
     @Test
-    void getAllProductIds() {
+    void getAllProducts() throws VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
+        // Arrange
+        Product p1 = new Product("1", "Chips", new BigDecimal("4.50"), 10);
+        Product p2 = new Product("2", "Apple", new BigDecimal("5.00"), 10);
+        Product p3 = new Product("3", "Pretzels", new BigDecimal("2.50"), 10);
+        service.addProduct(1, p1);
+        service.addProduct(2, p2);
+        service.addProduct(3, p3);
+        // Act
+        List<Product> productList = service.getAllProducts();
+        // Assert
+        assertNotNull(productList);
+        assertEquals(3, productList.size());
+        assertTrue(productList.contains(p1));
+        assertTrue(productList.contains(p2));
+        assertTrue(productList.contains(p3));
     }
 
     @Test

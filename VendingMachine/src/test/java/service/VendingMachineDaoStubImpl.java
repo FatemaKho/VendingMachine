@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.service;
+package service;
 
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dto.Product;
