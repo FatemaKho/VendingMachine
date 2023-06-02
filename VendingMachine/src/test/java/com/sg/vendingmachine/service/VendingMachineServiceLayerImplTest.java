@@ -2,10 +2,7 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class VendingMachineServiceLayerImplTest {
 
@@ -13,13 +10,8 @@ class VendingMachineServiceLayerImplTest {
 
     public VendingMachineServiceLayerImplTest() {
         VendingMachineDao dao = new VendingMachineDaoStubImpl();
-        VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
-
+        VendingMachineAuditDao auditDao= new VendingMachineAuditDaoStubImpl();
         service = new VendingMachineServiceLayerImpl(dao, auditDao);
-    }
-
-    @BeforeEach
-    void setUp() {
     }
 
     @Test
