@@ -2,6 +2,7 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
+
 import com.sg.vendingmachine.dto.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,15 +12,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Test;
 class VendingMachineServiceLayerImplTest {
 
     private VendingMachineServiceLayer service;
 
     public VendingMachineServiceLayerImplTest() {
         VendingMachineDao dao = new VendingMachineDaoStubImpl();
-        VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
-
+        VendingMachineAuditDao auditDao= new VendingMachineAuditDaoStubImpl();
         service = new VendingMachineServiceLayerImpl(dao, auditDao);
     }
 
