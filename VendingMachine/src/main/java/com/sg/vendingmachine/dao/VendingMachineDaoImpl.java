@@ -34,7 +34,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     @Override
     public ArrayList<Product> getAllProducts() throws VendingMachinePersistenceException  {
         loadProductsFromFile();
-        return new ArrayList<Product>(products.values());    }
+        return new ArrayList<Product>(products.values());
+    }
 
     @Override
     public ArrayList<Integer> getAllProductIds() throws VendingMachinePersistenceException  {
@@ -88,6 +89,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         scanner.close();
         return products;
         }
+
         public void decreaseStockItem (Product product) throws VendingMachinePersistenceException {
             loadProductsFromFile();
             int numItems = product.getItemsInStock();
@@ -95,7 +97,6 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             product.setItemsInStock(numItems);
             writeProductsToFile();
         }
-
 
         @Override
         public void writeProductsToFile () throws VendingMachinePersistenceException {
