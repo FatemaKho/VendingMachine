@@ -136,6 +136,9 @@ public class VendingMachineDaoImplTest {
         //result
         Product result = testDao.updateProduct(Integer.parseInt(prod1.getProductId()), prod1);
         Product expResult = new Product("1", "Cheetos", BigDecimal.valueOf(3.00), 14);
+        assertEquals(expResult.getProductId(), result.getProductId());
+        assertEquals(expResult.getProductName(), result.getProductName());
+
     }
 }
 
