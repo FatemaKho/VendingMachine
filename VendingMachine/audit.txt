@@ -1,0 +1,12 @@
+2023-06-02T14:41:12.463577 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:01:01.944642 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:02:13.006352 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:03:04.108203 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:05:13.569505 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:05:53.445762 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:07:48.539106 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:09:20.273619 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:13:03.984917 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:13:03.990830 : Stock item decreased to 8 for Product: Chips
+2023-06-02T15:13:50.264079 : Stock item decreased to 9 for Product: Chips
+2023-06-02T15:14:02.569427 : Stock item decreased to 8 for Product: Chips
