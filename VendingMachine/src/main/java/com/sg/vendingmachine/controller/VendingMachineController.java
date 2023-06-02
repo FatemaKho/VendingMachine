@@ -52,6 +52,7 @@ public class VendingMachineController {
                 view.displayNoProductInventoryMessage();
             } else {
                 service.decreaseStockItem(product);
+
             }
         } catch (VendingMachineDataValidationException e) {
             e.getMessage();

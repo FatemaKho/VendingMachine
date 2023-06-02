@@ -28,6 +28,8 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                     auditDao.writeAuditEntry("Product Name: " + p.getProductName());
                 } else {
                     productsInStock.put(p.getProductName(), p);
+                    auditDao.writeAuditEntry("Product Name: " + p.getProductName());
+
                 }
         }
     return productsInStock;
@@ -105,6 +107,8 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public void decreaseStockItem(Product product) throws VendingMachineDataValidationException, VendingMachinePersistenceException  {
         validateProductData(product);
         dao.decreaseStockItem(product);
+        auditDao.writeAuditEntry("Stock item decreased to " +product.getItemsInStock()+ " for Product: " + product.getProductName());
+
     }
 
     private void validateProductData(Product product) throws VendingMachineDataValidationException {
