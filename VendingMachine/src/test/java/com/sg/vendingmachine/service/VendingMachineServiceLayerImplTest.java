@@ -3,6 +3,7 @@ package com.sg.vendingmachine.service;
 import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
 
+import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,11 +37,34 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
-    void remainingChange() {
+    void remainingChange() throws VendingMachineNoKeyException, VendingMachinePersistenceException {
+        Product cakeTest = new Product("1", "Cake", BigDecimal.valueOf(2.50), 5);
+        Product brownieTest = new Product("2", "Brownie", BigDecimal.valueOf(3.50), 5);
+        BigDecimal moneyDeposited = new BigDecimal("5.00");
+
+        Change cakeChange = service.remainingChange(moneyDeposited, cakeTest);
+        Change brownieChange = service.remainingChange(moneyDeposited, brownieTest);
+
+        assertEquals(10, cakeChange.getQuarters(), "Change should return 10 quarters");
+        assertEquals(0, cakeChange.getDimes(), "Change should return 0 dimes");
+        assertEquals(0, cakeChange.getNickels(), "Change should return 0 nickels");
+        assertEquals(0, cakeChange.getPennies(), "Change should return 0 pennies");
+
+        assertEquals(6, brownieChange.getQuarters(), "Change should return 6 quarters");
+        assertEquals(0, brownieChange.getDimes(), "Change should return 0 dimes");
+        assertEquals(0, brownieChange.getNickels(), "Change should return 0 nickels");
+        assertEquals(0, brownieChange.getPennies(), "Change should return 0 pennies");
     }
 
     @Test
-    void addProduct() {
+    void addProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
+        Product testProduct = new Product("3", "Gumball", new BigDecimal("5.00"), 5);
+
+        service.addProduct(3, testProduct);
+
+        Product addedProduct = service.getProduct(3);
+
+        assertEquals(testProduct, addedProduct, "The test product was added to the products treemap.");
     }
 
     @Test
