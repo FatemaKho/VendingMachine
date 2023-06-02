@@ -49,8 +49,6 @@ public VendingMachineDaoImplTest() {
 
 
     }
-public void testAddGetAllProductIds(){
 
-}
 
 }
