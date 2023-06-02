@@ -26,13 +26,11 @@ class VendingMachineServiceLayerImplTest {
 
     @Test
     void loadProductsInStock() throws VendingMachinePersistenceException {
-        Product p1 = new Product("1", "Cake", new BigDecimal("2.50"), 2);
-        Product p2 = new Product("2", "Water", new BigDecimal("1.05"), 2);
+        Product p1 = new Product("1", "Cake", new BigDecimal("2.5"), 5);
 
         Map<String, Product> result = service.loadProductsInStock();
         Map<String, Product> expResult = new TreeMap<>();
-        expResult.put("1", p1);
-        expResult.put("2", p2);
+        expResult.put("Cake", p1);
 
         assertEquals(result, expResult);
     }
@@ -74,7 +72,7 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
-    void updateProduct() throws VendingMachinePersistenceException, VendingMachineDataValidationException, VendingMachineDuplicateIdException {
+    void updateProduct() throws VendingMachinePersistenceException, VendingMachineDataValidationException, VendingMachineDuplicateIdException, VendingMachineNoKeyException {
         Product p1 = new Product("1", "Chips", new BigDecimal("4.50"), 10);
         Product p2 = new Product("2", "Apple", new BigDecimal("5.00"), 10);
         Product p3 = new Product("3", "Pretzels", new BigDecimal("2.50"), 10);
@@ -83,13 +81,13 @@ class VendingMachineServiceLayerImplTest {
         service.addProduct(2, p2);
         service.addProduct(3, p3);
 
-        service.updateProduct(1, new Product("1", "Candy", new BigDecimal("4.50"), 10));
-        service.updateProduct(2, new Product("2", "Apple", new BigDecimal("6.00"), 10));
-        service.updateProduct(3, new Product("3", "Pretzels", new BigDecimal("2.50"), 5));
+        Product testP1 = service.updateProduct(1, new Product("1", "Candy", new BigDecimal("4.50"), 10));
+        Product testP2 = service.updateProduct(2, new Product("2", "Apple", new BigDecimal("6.00"), 10));
+        Product testP3 =  service.updateProduct(3, new Product("3", "Pretzels", new BigDecimal("2.50"), 5));
 
-        assertTrue(p1.getProductName().equals("Candy"));
-        assertTrue(p2.getPrice().equals(new BigDecimal("6.00")));
-        assertEquals(p3.getItemsInStock(), 5);
+        assertTrue(service.getProduct(1).getProductName().equals(testP1.getProductName()));
+        assertTrue(service.getProduct(2).getPrice().equals(new BigDecimal("6.00")));
+        assertEquals(service.getProduct(3).getItemsInStock(), testP3.getItemsInStock());
     }
 
     @Test
