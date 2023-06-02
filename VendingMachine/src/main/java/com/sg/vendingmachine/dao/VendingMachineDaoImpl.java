@@ -88,6 +88,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         scanner.close();
         return products;
         }
+
         public void decreaseStockItem (Product product) throws VendingMachinePersistenceException {
             loadProductsFromFile();
             int numItems = product.getItemsInStock();
@@ -95,7 +96,6 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             product.setItemsInStock(numItems);
             writeProductsToFile();
         }
-
 
         @Override
         public void writeProductsToFile () throws VendingMachinePersistenceException {
