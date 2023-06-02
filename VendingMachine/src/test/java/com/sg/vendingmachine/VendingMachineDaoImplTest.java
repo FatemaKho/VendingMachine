@@ -38,6 +38,9 @@ public class VendingMachineDaoImplTest {
         Product p1 = new Product("1", "Chips", bd, 1);
         bd = new BigDecimal("2.50");
         Product p2 = new Product("2", "Water", bd, 1);
+        //Add to testproducts.txt
+        testDao.addProduct(1,p1);
+        testDao.addProduct(2,p2);
         //Result
         Map<Integer, Product> result = testDao.loadProductsFromFile();
         //Expected Result
