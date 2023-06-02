@@ -1,4 +1,0 @@
-2023-06-01T20:10:19.584448 : Stock item decreased for Product: 1
-2023-06-01T20:12:26.362922 : Stock item decreased for Product: Chips
-2023-06-01T20:16:28.530441 : Stock item decreased for Product: Chips 9
-2023-06-01T20:19:16.704186 : Stock item decreased to  9 for Product: Chips

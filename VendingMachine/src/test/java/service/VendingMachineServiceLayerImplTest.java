@@ -1,7 +1,9 @@
-package com.sg.vendingmachine.service;
+package service;
 
 import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
+import com.sg.vendingmachine.service.VendingMachineServiceLayer;
+import com.sg.vendingmachine.service.VendingMachineServiceLayerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
