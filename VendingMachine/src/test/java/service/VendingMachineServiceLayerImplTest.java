@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -57,22 +58,44 @@ class VendingMachineServiceLayerImplTest {
     }
 
     @Test
-    void addProduct() throws VendingMachineNoKeyException, VendingMachinePersistenceException, VendingMachineDuplicateIdException, VendingMachineDataValidationException {
-        Product testProduct = new Product("3", "Gumball", new BigDecimal("5.00"), 5);
+void addProduct() throws VendingMachinePersistenceException, VendingMachineDataValidationException, VendingMachineDuplicateIdException {
 
-        service.addProduct(3, testProduct);
+    int productId = 1;
+    Product product = new Product("1", "Chips", new BigDecimal("5.00"), 10);
 
-        Product addedProduct = service.getProduct(3);
+    Product addedProduct = service.addProduct(productId, product);
 
-        assertEquals(testProduct, addedProduct, "The test product was added to the products treemap.");
+    assertNotNull(addedProduct);
+    assertEquals(productId, addedProduct.getProductId().intValue());
+    assertEquals(product.getProductName(), addedProduct.getProductName());
+    assertEquals(product.getPrice(), addedProduct.getPrice());
+    assertEquals(product.getItemsInStock(), addedProduct.getItemsInStock());
+}
+
+
+      @Test
+    void getAllProducts() throws VendingMachinePersistenceException {
+        // Arrange
+
+        // Act
+        List<Product> productList = service.getAllProducts();
+
+        // Assert
+        assertNotNull(productList);
+        assertEquals(3, productList.size());
     }
 
-    @Test
-    void getAllProducts() {
-    }
 
     @Test
-    void getAllProductIds() {
+    void getAllProductIds() throws VendingMachinePersistenceException {
+        // Arrange
+
+        // Act
+        List<Integer> productIdList = service.getAllProductIds();
+
+        // Assert
+        assertNotNull(productIdList);
+        assertEquals(3, productIdList.size());
     }
 
     @Test
