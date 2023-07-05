@@ -1,1 +1,1 @@
-# VendingMachine
+# VendingMachine project in Java
